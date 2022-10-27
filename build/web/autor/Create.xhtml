@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAutorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_codAutor}" for="codAutor" />
+                    <h:inputText id="codAutor" value="#{autorController.selected.codAutor}" title="#{bundle.CreateAutorTitle_codAutor}" required="true" requiredMessage="#{bundle.CreateAutorRequiredMessage_codAutor}"/>
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_nomAutor}" for="nomAutor" />
+                    <h:inputText id="nomAutor" value="#{autorController.selected.nomAutor}" title="#{bundle.CreateAutorTitle_nomAutor}" />
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_apellido1}" for="apellido1" />
+                    <h:inputText id="apellido1" value="#{autorController.selected.apellido1}" title="#{bundle.CreateAutorTitle_apellido1}" />
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_apellido2}" for="apellido2" />
+                    <h:inputText id="apellido2" value="#{autorController.selected.apellido2}" title="#{bundle.CreateAutorTitle_apellido2}" />
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_FNac}" for="FNac" />
+                    <h:inputText id="FNac" value="#{autorController.selected.FNac}" title="#{bundle.CreateAutorTitle_FNac}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_FDef}" for="FDef" />
+                    <h:inputText id="FDef" value="#{autorController.selected.FDef}" title="#{bundle.CreateAutorTitle_FDef}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_foto}" for="foto" />
+                    <h:inputText id="foto" value="#{autorController.selected.foto}" title="#{bundle.CreateAutorTitle_foto}" />
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_localidad}" for="localidad" />
+                    <h:inputText id="localidad" value="#{autorController.selected.localidad}" title="#{bundle.CreateAutorTitle_localidad}" />
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_biografia}" for="biografia" />
+                    <h:inputTextarea rows="4" cols="30" id="biografia" value="#{autorController.selected.biografia}" title="#{bundle.CreateAutorTitle_biografia}" />
+                    <h:outputLabel value="#{bundle.CreateAutorLabel_nacionalidad}" for="nacionalidad" />
+                    <h:selectOneMenu id="nacionalidad" value="#{autorController.selected.nacionalidad}" title="#{bundle.CreateAutorTitle_nacionalidad}" >
+                        <f:selectItems value="#{paisController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{autorController.create}" value="#{bundle.CreateAutorSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{autorController.prepareList}" value="#{bundle.CreateAutorShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAutorIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

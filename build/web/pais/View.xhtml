@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPaisTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPaisLabel_codPais}"/>
+                    <h:outputText value="#{paisController.selected.codPais}" title="#{bundle.ViewPaisTitle_codPais}"/>
+                    <h:outputText value="#{bundle.ViewPaisLabel_nomPais}"/>
+                    <h:outputText value="#{paisController.selected.nomPais}" title="#{bundle.ViewPaisTitle_nomPais}"/>
+                    <h:outputText value="#{bundle.ViewPaisLabel_bandera}"/>
+                    <h:outputText value="#{paisController.selected.bandera}" title="#{bundle.ViewPaisTitle_bandera}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{paisController.destroyAndView}" value="#{bundle.ViewPaisDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPaisEditLink}"/>
+                <br />
+                <h:commandLink action="#{paisController.prepareCreate}" value="#{bundle.ViewPaisCreateLink}" />
+                <br />
+                <h:commandLink action="#{paisController.prepareList}" value="#{bundle.ViewPaisShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPaisIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+>
+    
+      
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        
+        
+        <h:form>
+            <p:tieredMenu style="width:200px">
+                <p:submenu label="Autores" icon="pi pi-fw pi-users">
+                    <p:menuitem value="Libros" outcome="/autor/List" icon="pi pi-fw pi-plus"/>
+                    <p:menuitem value="Bookmark" icon="pi pi-fw pi-bookmark"/>
+                    <p:menuitem value="Video" icon="pi pi-fw pi-video"/>
+                </p:submenu>
+                <p:divider />
+                <p:submenu label="Paises" icon="pi pi-globe">
+                    <p:menuitem value="Listado" outcome="/pais/List" icon="pi pi-fw pi-flag"></p:menuitem>
+                    <p:menuitem value="Sus Autores" outcome="/pais/List" icon="pi pi-fw pi-users"></p:menuitem>
+                </p:submenu>
+                <p:submenu label="Libros" icon="pi pi-globe">
+                    <p:menuitem value="Listado" outcome="/libro/List" icon="pi pi-fw pi-flag"></p:menuitem>
+                    <p:menuitem value="Libros por autor" outcome="/libro/LibrosAutor" icon="pi pi-fw pi-flag"></p:menuitem>
+                </p:submenu>
+            </p:tieredMenu>
+
+        </h:form>
+        
+    </h:body>
+
+
+
+
+
+</html>
+

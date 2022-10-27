@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateLibroTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_codLibro}" for="codLibro" />
+                    <h:inputText id="codLibro" value="#{libroController.selected.codLibro}" title="#{bundle.CreateLibroTitle_codLibro}" required="true" requiredMessage="#{bundle.CreateLibroRequiredMessage_codLibro}"/>
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_nomLibro}" for="nomLibro" />
+                    <h:inputText id="nomLibro" value="#{libroController.selected.nomLibro}" title="#{bundle.CreateLibroTitle_nomLibro}" />
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_ano}" for="ano" />
+                    <h:inputText id="ano" value="#{libroController.selected.ano}" title="#{bundle.CreateLibroTitle_ano}" />
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_portada}" for="portada" />
+                    <h:inputText id="portada" value="#{libroController.selected.portada}" title="#{bundle.CreateLibroTitle_portada}" required="true" requiredMessage="#{bundle.CreateLibroRequiredMessage_portada}"/>
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_nomArchivo}" for="nomArchivo" />
+                    <h:inputText id="nomArchivo" value="#{libroController.selected.nomArchivo}" title="#{bundle.CreateLibroTitle_nomArchivo}" required="true" requiredMessage="#{bundle.CreateLibroRequiredMessage_nomArchivo}"/>
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_pelicula}" for="pelicula" />
+                    <h:inputText id="pelicula" value="#{libroController.selected.pelicula}" title="#{bundle.CreateLibroTitle_pelicula}" />
+                    <h:outputLabel value="#{bundle.CreateLibroLabel_comentario}" for="comentario" />
+                    <h:inputTextarea rows="4" cols="30" id="comentario" value="#{libroController.selected.comentario}" title="#{bundle.CreateLibroTitle_comentario}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{libroController.create}" value="#{bundle.CreateLibroSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{libroController.prepareList}" value="#{bundle.CreateLibroShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateLibroIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

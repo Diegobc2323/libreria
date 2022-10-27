@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAutorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <p:toolbar style="margin-bottom: 10px; width: 59%; float: left">
+                    <f:facet name="left">
+                        <p:selectOneMenu id="autor" value="#{libroController.autor}" onchange="#{libroController.cargarLibrosAutor()} submit()">
+                            <f:selectItems value="#{autorController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu> 
+                    </f:facet>
+                    <f:facet name="right">
+                        <h:graphicImage library="Escritores" name="#{libroController.autor.foto}" height="60"/>
+                    </f:facet>
+                </p:toolbar>
+            </h:form>    
+                
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListLibroEmpty}" rendered="#{libroController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{libroController.items.rowCount > 0}">
+                   <p:dataTable var="item" value="#{libroController.libros}" style="margin-bottom:20px; width:70%; align-content: center; float: left;">
+                       <p:column headerText="Código" width="10%" style="text-align: center">
+                            <h:outputText value="#{item.codLibro}"/>
+                        </p:column>
+                        <p:column headerText="Titulo" width="10%" style="text-align: center">
+                            <h:outputText value="#{item.nomLibro}"/>
+                        </p:column>
+                       <p:column headerText="portada" width="15%">
+                            <p:lightBox styleClass="imagebox" width="10%">
+                                <h:outputLink value="/libreria/faces/javax.faces.resources/#{item.portada}?ln=portadas" title="#{item.nomLibro}">
+                                    <h:graphicImage library="portadas" name="#{item.portada}" style="height: 100px"/>
+                                </h:outputLink>
+                            </p:lightBox>
+                        </p:column>
+                        <p:column headerText="Año publicacion" width="10%" style="text-align: center">
+                            <h:outputText value="#{item.ano}"/>
+                        </p:column>
+                       <p:column headerText="Premios">
+                            <h:selectManyListbox size="3" style="overflow-y: scroll; width: 25vh; border: none; background: none; font-size: small;" disabled="true">
+                                <f:selectItems value="#{item.premioList}" var="premio" itemLabel="#{premio.nomPremio}"/>
+                            </h:selectManyListbox>
+                        </p:column>  
+                    </p:dataTable>
+                    
+                    <p:galleria value="#{libroController.libros}" var="libro" showCaption="true" panelHeight="400" panelWidth="250" style="float: right; margin-right: 70px " autoPlay="true" transitionInterval="5000"> 
+                        <p:graphicImage library="portadas" name="#{libro.portada}" title="#{libro.ano}" style="width: 100%" />
+                    </p:galleria>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{libroController.prepareCreate}" value="#{bundle.ListLibroCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListLibroIndexLink}"/>
+            
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+

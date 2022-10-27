@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAutorPremioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditAutorPremioLabel_autorPremioPK_anio}" for="autorPremioPK_anio" />
+                    <h:inputText id="autorPremioPK_anio" value="#{autorPremioController.selected.autorPremioPK.anio}" title="#{bundle.EditAutorPremioTitle_autorPremioPK_anio}" required="true" requiredMessage="#{bundle.EditAutorPremioRequiredMessage_autorPremioPK_anio}"/>
+                    <h:outputLabel value="#{bundle.EditAutorPremioLabel_autor}" for="autor" />
+                    <h:selectOneMenu id="autor" value="#{autorPremioController.selected.autor}" title="#{bundle.EditAutorPremioTitle_autor}" required="true" requiredMessage="#{bundle.EditAutorPremioRequiredMessage_autor}">
+                        <f:selectItems value="#{autorController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditAutorPremioLabel_premio}" for="premio" />
+                    <h:selectOneMenu id="premio" value="#{autorPremioController.selected.premio}" title="#{bundle.EditAutorPremioTitle_premio}" required="true" requiredMessage="#{bundle.EditAutorPremioRequiredMessage_premio}">
+                        <f:selectItems value="#{premioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{autorPremioController.update}" value="#{bundle.EditAutorPremioSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditAutorPremioViewLink}"/>
+                <br />
+                <h:commandLink action="#{autorPremioController.prepareList}" value="#{bundle.EditAutorPremioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditAutorPremioIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

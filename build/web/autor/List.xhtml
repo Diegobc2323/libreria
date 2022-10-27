@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+          
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAutorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAutorEmpty}" rendered="#{autorController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{autorController.items.rowCount > 0}">
+                    <h:outputText value="#{autorController.pagination.pageFirstItem + 1}..#{autorController.pagination.pageLastItem + 1}/#{autorController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{autorController.previous}" value="#{bundle.Previous} #{autorController.pagination.pageSize}" rendered="#{autorController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{autorController.next}" value="#{bundle.Next} #{autorController.pagination.pageSize}" rendered="#{autorController.pagination.hasNextPage}"/>&nbsp;
+                    <p:dataTable var="autor" value="#{autorController.items}" rows="10"
+                     paginator="true" paginatorPosition="both"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+                        <p:column headerText="Codigo" sortBy="#{autor.codAutor}" class="text-center" width="8%"> 
+                            <h:outputText value="#{autor.codAutor}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Nombre" sortBy="#{autor.apellido1} #{autor.apellido2}" width="10%" filterBy="#{autor.nomAutor} #{autor.apellido1} #{autor.apellido2}" filterMatchMode="contains">
+                            <h:outputText value="#{autor.nomAutor} #{autor.apellido1} #{autor.apellido2}"/>
+                        </p:column>
+                        
+                        <p:column headerText="f_nac" sortBy="#{autor.autor.FNac}" width="10%">
+                            <h:outputText value="#{autor.FNac}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+                        
+                        <p:column headerText="f_def" sortBy="#{autor.autor.FDef}" width="10%">
+                            <h:outputText value="#{autor.FDef}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+                        
+                        <p:column headerText="Edad" width="10%">
+                            <h:outputText value="#{autorController.calcular_edad(autor.FNac)}" style="display: #{autorController.mostrar_edad(autor)}"/>
+                        </p:column>
+                    
+                        <p:column width="10%">
+                            <p:lightBox styleClass="imagebox" width="10%">
+                                <h:outputLink value="/libreria/faces/javax.faces.resources/#{autor.foto}?ln=Escritores" title="#{autor.nomAutor} #{autor.apellido1} #{autor.apellido2}">
+                                    <h:graphicImage library="Escritores" name="#{autor.foto}" style="height: 9vh"/>
+                                </h:outputLink>
+                            </p:lightBox>
+                        </p:column>  
+
+                        <p:column width="10%" headerText="Pais" filterBy="#{autor.nacionalidad.nomPais}" filterMatchMode="contains">
+                            <p:lightBox styleClass="imagebox">
+                                <h:graphicImage library="banderas" name="#{autor.nacionalidad.bandera}" style="height: 9vh; border: 1px solid black;"/>
+                                <br/>
+                                <!--<h:outputText value="#{autor.nacionalidad.nomPais}"/>-->
+                            </p:lightBox>
+                        </p:column>
+
+                        <p:column headerText="sus libros" width="10%">
+                            <h:selectManyListbox size="3" style="overflow-y: scroll; width: 20vh; border: none; background: none; font-size: small;" disabled="true">
+                                <f:selectItems value="#{autor.libroList}" var="libro" itemLabel="#{libro.nomLibro}"/>
+                            </h:selectManyListbox>
+                        </p:column>                        
+                        
+                        <p:column width="20%">
+                            <p:commandButton icon="pi pi-desktop" styleClass="rounded-button ui-button-flat" action="#{autorController.prepareView()}"/>
+                            <p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-secondary ui-button-flat" action="#{autorController.prepareEdit()}"/>
+                            <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat" action="#{autorController.destroy()}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{autorController.prepareCreate}" value="#{bundle.ListAutorCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAutorIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

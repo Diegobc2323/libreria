@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewLibroTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewLibroLabel_codLibro}"/>
+                    <h:outputText value="#{libroController.selected.codLibro}" title="#{bundle.ViewLibroTitle_codLibro}"/>
+                    <h:outputText value="#{bundle.ViewLibroLabel_nomLibro}"/>
+                    <h:outputText value="#{libroController.selected.nomLibro}" title="#{bundle.ViewLibroTitle_nomLibro}"/>
+                    <h:outputText value="#{bundle.ViewLibroLabel_ano}"/>
+                    <h:outputText value="#{libroController.selected.ano}" title="#{bundle.ViewLibroTitle_ano}"/>
+                    <h:outputText value="#{bundle.ViewLibroLabel_portada}"/>
+                    <h:outputText value="#{libroController.selected.portada}" title="#{bundle.ViewLibroTitle_portada}"/>
+                    <h:outputText value="#{bundle.ViewLibroLabel_nomArchivo}"/>
+                    <h:outputText value="#{libroController.selected.nomArchivo}" title="#{bundle.ViewLibroTitle_nomArchivo}"/>
+                    <h:outputText value="#{bundle.ViewLibroLabel_pelicula}"/>
+                    <h:outputText value="#{libroController.selected.pelicula}" title="#{bundle.ViewLibroTitle_pelicula}"/>
+                    <h:outputText value="#{bundle.ViewLibroLabel_comentario}"/>
+                    <h:outputText value="#{libroController.selected.comentario}" title="#{bundle.ViewLibroTitle_comentario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{libroController.destroyAndView}" value="#{bundle.ViewLibroDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewLibroEditLink}"/>
+                <br />
+                <h:commandLink action="#{libroController.prepareCreate}" value="#{bundle.ViewLibroCreateLink}" />
+                <br />
+                <h:commandLink action="#{libroController.prepareList}" value="#{bundle.ViewLibroShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewLibroIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

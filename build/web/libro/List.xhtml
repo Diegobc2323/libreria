@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLibroTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListLibroEmpty}" rendered="#{libroController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{libroController.items.rowCount > 0}">
+                    <h:outputText value="#{libroController.pagination.pageFirstItem + 1}..#{libroController.pagination.pageLastItem + 1}/#{libroController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{libroController.previous}" value="#{bundle.Previous} #{libroController.pagination.pageSize}" rendered="#{libroController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{libroController.next}" value="#{bundle.Next} #{libroController.pagination.pageSize}" rendered="#{libroController.pagination.hasNextPage}"/>&nbsp;
+                    <p:dataTable var="libro" value="#{libroController.items}" rows="10"
+                     paginator="true" paginatorPosition="both"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+                                         
+                        <p:column headerText="Codigo">
+                                <h:outputText value="#{libro.codLibro}"/>
+                        </p:column>
+                        <p:column headerText="Nombre" width="6%">
+                            <h:outputText value="#{libro.nomLibro}"/>
+                        </p:column>
+                        <p:column headerText="Año Publicacion">
+                            <h:outputText value="#{libro.ano}"/>
+                        </p:column>
+                        <p:column width="15%" headerText="Portada">
+                            <p:lightBox styleClass="imagebox" width="8%">
+                                <h:outputLink value="/libreria/faces/javax.faces.resources/#{libro.portada}?ln=portadas" title="#{libro.portada}">
+                                    <h:graphicImage library="portadas" name="#{libro.portada}" width="100px"/>
+                                </h:outputLink>
+                            </p:lightBox>
+                        </p:column>
+                        <p:column headerText="Archivo">
+                            <h:outputText value="#{libro.nomArchivo}"/>
+                        </p:column>
+                        <p:column headerText="Escritores">
+                            
+                        </p:column>
+                        
+                        <p:column headerText="Acciones">
+                            <p:commandButton icon="pi pi-desktop" styleClass="rounded-button ui-button-flat"/>
+                            <p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-secondary ui-button-flat"/>
+                            <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat"/>
+                        </p:column>
+                    </p:dataTable> 
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{libroController.prepareCreate}" value="#{bundle.ListLibroCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListLibroIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
