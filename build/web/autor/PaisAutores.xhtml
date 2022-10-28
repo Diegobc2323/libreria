@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAutorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <p:toolbar style="margin-bottom: 10px; width: 59%; float: left">
+                    <f:facet name="left">
+                        <p:selectOneMenu id="autor" value="#{autorController.pais}" onchange="#{autorController.cargarAutoresPais()} submit()">
+                            <f:selectItems value="#{paisController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu> 
+                    </f:facet>
+                    <f:facet name="right">
+                        <h:graphicImage library="banderas" name="#{autorController.pais.bandera}" height="60"/>
+                    </f:facet>
+                </p:toolbar>
+            </h:form>    
+                
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListLibroEmpty}" rendered="#{autorController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{autorController.items.rowCount > 0}">
+                   <p:dataTable var="autor" value="#{autorController.autores}" style="margin-bottom:20px; width:70%; align-content: center; float: left;">
+                       <p:column headerText="Código" width="10%" style="text-align: center">
+                            <h:outputText value="#{autor.codAutor}"/>
+                        </p:column>
+                        <p:column headerText="Nombre" width="10%" style="text-align: center">
+                            <h:outputText value="#{autor.nomAutor} #{autor.apellido1} #{autor.apellido2}"/>
+                        </p:column>
+                       <p:column headerText="Foto" width="15%">
+                            <p:lightBox styleClass="imagebox" width="10%">
+                                <h:outputLink value="/libreria/faces/javax.faces.resources/#{autor.foto}?ln=Escritores" title="#{autor.nomAutor} #{autor.apellido1} #{autor.apellido2}">
+                                    <h:graphicImage library="Escritores" name="#{autor.foto}" style="height: 100px"/>
+                                </h:outputLink>
+                            </p:lightBox>
+                        </p:column>  
+                    </p:dataTable>
+                    
+                    <p:galleria value="#{autorController.autores}" var="autor" showCaption="true" panelHeight="400" panelWidth="250" style="float: right; margin-right: 70px " autoPlay="true" transitionInterval="5000"> 
+                        <p:graphicImage library="Escritores" name="#{autor.foto}" title="#{autor.nomAutor} #{autor.apellido1} #{autor.apellido2}" style="width: 100%" />
+                    </p:galleria>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{autorController.prepareCreate}" value="#{bundle.ListLibroCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListLibroIndexLink}"/>
+            
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
+

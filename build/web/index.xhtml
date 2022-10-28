@@ -11,33 +11,31 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        
-        
         <h:form>
             <p:tieredMenu style="width:200px">
-                <p:submenu label="Autores" icon="pi pi-fw pi-users">
-                    <p:menuitem value="Libros" outcome="/autor/List" icon="pi pi-fw pi-plus"/>
-                    <p:menuitem value="Bookmark" icon="pi pi-fw pi-bookmark"/>
-                    <p:menuitem value="Video" icon="pi pi-fw pi-video"/>
-                </p:submenu>
-                <p:divider />
-                <p:submenu label="Paises" icon="pi pi-globe">
-                    <p:menuitem value="Listado" outcome="/pais/List" icon="pi pi-fw pi-flag"></p:menuitem>
-                    <p:menuitem value="Sus Autores" outcome="/pais/List" icon="pi pi-fw pi-users"></p:menuitem>
-                </p:submenu>
-                <p:submenu label="Libros" icon="pi pi-globe">
-                    <p:menuitem value="Listado" outcome="/libro/List" icon="pi pi-fw pi-flag"></p:menuitem>
-                    <p:menuitem value="Libros por autor" outcome="/libro/LibrosAutor" icon="pi pi-fw pi-flag"></p:menuitem>
-                </p:submenu>
-            </p:tieredMenu>
-
+            <p:submenu label="Autores" icon="pi pi-fw pi-users">
+                <p:menuitem value="Listado" outcome="/autor/List" icon="pi pi-fw pi-sort-alpha-down"/>
+                <p:menuitem value="Sus Libros" outcome="/libro/LibrosAutor" icon="pi pi-fw pi-book"/>
+                <p:menuitem value="Sus premios" icon="pi pi-fw pi-star"/>
+            </p:submenu>
+            <p:separator/>
+            <p:submenu label="Libros" icon="pi pi-fw pi-book">
+                <p:menuitem value="Listado" outcome="/libro/List" icon="pi pi-fw pi-sort-alpha-down"/>
+                <p:menuitem value="Sus Premios" icon="pi pi-fw pi-star"/>
+            </p:submenu>
+            <p:separator/>
+            <p:submenu label="Premios" icon="pi pi-fw pi-plus">
+                <p:menuitem value="Listado" outcome="/premio/List" icon="pi pi-fw pi-sort-alpha-down"/>
+                <p:menuitem value="Por Autor" icon="pi pi-fw pi-user-edit"/>
+                <p:menuitem value="Por Libro" icon="pi pi-fw pi-book"/>
+            </p:submenu>
+            <p:separator/>
+            <p:submenu label="Paises" icon="pi pi-fw pi-globe">
+                <p:menuitem value="Listado" outcome="/pais/List" icon="pi pi-fw pi-sort-alpha-down"/>
+                <p:menuitem value="Sus Autores" outcome="/autor/PaisAutores" icon="pi pi-fw pi-users"/>
+            </p:submenu>
+            <p:separator/>
+        </p:tieredMenu>
         </h:form>
-        
     </h:body>
-
-
-
-
-
 </html>
-

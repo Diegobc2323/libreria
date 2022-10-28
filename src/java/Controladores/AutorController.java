@@ -3,6 +3,7 @@ package Controladores;
 import Entidades.Autor;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
+import Entidades.Pais;
 import Facades.AutorFacade;
 
 import java.io.Serializable;
@@ -31,10 +32,30 @@ public class AutorController implements Serializable {
     private Facades.AutorFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Pais pais;
+    private List<Autor> autores;
 
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
+    }
+    
     public AutorController() {
     }
 
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
+    
+    
     public Autor getSelected() {
         if (current == null) {
             current = new Autor();
@@ -228,6 +249,11 @@ public class AutorController implements Serializable {
             }else{
                 return "none";
             }
+        }
+        
+        public void cargarAutoresPais()
+        {
+            this.autores = ejbFacade.autoresDeUnPais(pais); 
         }
 
     @FacesConverter(forClass = Autor.class)

@@ -6,6 +6,7 @@
 package Facades;
 
 import Entidades.Autor;
+import Entidades.Pais;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ import javax.persistence.Query;
 /**
  *
  * @author propietario
+ * AQUI SE HACEN LAS LLAMADAS A CONSULTAS, LAS CUALES SE ENCUENTRAN EN LA CLASE AUTOR.JAVA
  */
 @Stateless
 public class AutorFacade extends AbstractFacade<Autor> {
@@ -35,6 +37,13 @@ public class AutorFacade extends AbstractFacade<Autor> {
         em = getEntityManager();
         Query q;
         q = em.createNamedQuery("Autor.findAllOrder");
+        return q.getResultList();
+    }
+    
+    public List<Autor> autoresDeUnPais(Pais pais){
+        em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Autor.findByPais").setParameter("pais", pais);
         return q.getResultList();
     }
     

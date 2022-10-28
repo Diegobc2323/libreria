@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -11,51 +12,61 @@
         </ui:define>
         <ui:define name="body">
             <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListPremioEmpty}" rendered="#{premioController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{premioController.items.rowCount > 0}">
-                    <h:outputText value="#{premioController.pagination.pageFirstItem + 1}..#{premioController.pagination.pageLastItem + 1}/#{premioController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{premioController.previous}" value="#{bundle.Previous} #{premioController.pagination.pageSize}" rendered="#{premioController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{premioController.next}" value="#{bundle.Next} #{premioController.pagination.pageSize}" rendered="#{premioController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{premioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPremioTitle_codPremio}"/>
+                
+                <p:dataTable value="#{premioController.items}" var="item" editable="true" style="width: 60%;" stripedRows="true">
+                    <p:column headerText="Código" width="10%" sortBy="#{item.codPremio}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{item.codPremio}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPremio}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPremioTitle_nomPremio}"/>
+                            <f:facet name="input">
+                                <p:inputText value="#{item.codPremio}"/>
                             </f:facet>
-                            <h:outputText value="#{item.nomPremio}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPremioTitle_tipo}"/>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="Denominación" width="40%" sortBy="#{item.nomPremio}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{item.nomPremio}"/>
                             </f:facet>
-                            <h:outputText value="#{item.tipo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPremioTitle_codPais}"/>
+                            <f:facet name="input">
+                                <p:inputText value="#{item.nomPremio}"/>
                             </f:facet>
-                            <h:outputText value="#{item.codPais}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="Tipo" width="8%" sortBy="#{item.tipo}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{item.tipo}"/>
                             </f:facet>
-                            <h:commandLink action="#{premioController.prepareView}" value="#{bundle.ListPremioViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{premioController.prepareEdit}" value="#{bundle.ListPremioEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{premioController.destroy}" value="#{bundle.ListPremioDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
+                            <f:facet name="input">
+                                <p:selectOneMenu value="#{item.tipo}">
+                                    <f:selectItem itemValue="A" itemLabel="A"/>
+                                    <f:selectItem itemValue="L" itemLabel="L"/>
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="Pais" width="8%" sortBy="#{item.codPais.nomPais}">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{item.codPais.nomPais}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:selectOneMenu value="#{item.codPais}">
+                                    <f:selectItems value="#{paisController.itemsAvailableSelectOne}" var="pais" itemValue="#{pais}" itemLabel="#{pais}"/>
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column headerText="Editar">
+                        <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                    </p:column>
+                </p:dataTable>
                 <br />
                 <h:commandLink action="#{premioController.prepareCreate}" value="#{bundle.ListPremioCreateLink}"/>
                 <br />
