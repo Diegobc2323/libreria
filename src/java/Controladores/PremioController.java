@@ -28,10 +28,22 @@ public class PremioController implements Serializable {
     private Facades.PremioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Premio paraCrear;
 
     public PremioController() {
+    
+            paraCrear = new Premio();
+    
     }
 
+    public Premio getParaCrear() {
+        return paraCrear;
+    }
+
+    public void setParaCrear(Premio paraCrear) {
+        this.paraCrear = paraCrear;
+    }
+    
     public Premio getSelected() {
         if (current == null) {
             current = new Premio();
@@ -46,7 +58,7 @@ public class PremioController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(100) {
 
                 @Override
                 public int getItemsCount() {
@@ -81,9 +93,13 @@ public class PremioController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
+            getFacade().create(paraCrear);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PremioCreated"));
-            return prepareCreate();
+            //return prepareCreate();
+            recreateModel();
+            recreatePagination();
+            paraCrear = new Premio();
+            return "List_edicion";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

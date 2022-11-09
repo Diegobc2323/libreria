@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPremioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                
+                <p:dataTable value="#{premioController.items}" var="item" style="width: 60%;" stripedRows="true">
+                    <p:column headerText="Código" width="20%" sortBy="#{item.codPremio}">
+                        <p:inputText value="#{item.codPremio}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Denominación" width="40%" sortBy="#{item.nomPremio}">
+                        <p:inputText value="#{item.nomPremio}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Tipo" width="8%" sortBy="#{item.tipo}">
+                        <p:selectOneMenu value="#{item.tipo}">
+                            <f:selectItem itemValue="A" itemLabel="Autor"/>
+                            <f:selectItem itemValue="L" itemLabel="Libro"/>
+                        </p:selectOneMenu>
+                     </p:column>
+                    
+                    <p:column headerText="Pais" width="13%" sortBy="#{item.codPais.nomPais}">
+                        <p:selectOneMenu value="#{item.codPais}">
+                            <f:selectItems value="#{paisController.itemsAvailableSelectOne}" var="pais" itemValue="#{pais}" itemLabel="#{pais}"/>
+                        </p:selectOneMenu>
+                    </p:column>
+                    
+                    <p:column headerText="Update" width="10%" style="text-align: center ">
+                        <p:commandLink  action="#{premioController.update()}">
+                            <p:graphicImage library="iconos"  name="refresh.png" width="15px"/>
+                        </p:commandLink>
+                    </p:column>
+                    
+                    <p:column headerText="Eliminar" width="10%" style="text-align: center">
+                        <p:commandLink  action="#{premioController.destroy()}">
+                            <p:graphicImage library="iconos" name="eliminar.png" width="15px"/>
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+                <br />
+                <h:commandLink action="#{premioController.prepareCreate}" value="#{bundle.ListPremioCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPremioIndexLink}"/>
+            </h:form>
+            
+            <h:form>
+                <div align="center" style="width:100%">
+                    <p:panelGrid columns="5">
+                        <p:inputText value="#{premioController.paraCrear.codPremio}" size="3"/>
+                        <p:inputText value="#{premioController.paraCrear.nomPremio}" size="20"/>
+                        <p:selectOneMenu value="#{premioController.paraCrear.tipo}">
+                            <f:selectItem itemValue="A" itemLabel="Autor"/>
+                            <f:selectItem itemValue="L" itemLabel="Libro"/>
+                        </p:selectOneMenu>
+                        <p:selectOneMenu value="#{premioController.paraCrear.codPais}">
+                            <f:selectItems value="#{paisController.itemsAvailableSelectOne}" var="pais" itemValue="#{pais}" itemLabel="#{pais}"/>
+                        </p:selectOneMenu>
+                        <p:commandLink  action="#{premioController.create()}">
+                            <p:graphicImage library="iconos" name="add.png" width="15px"/>
+                        </p:commandLink>
+                    </p:panelGrid>
+                </div>
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+
+</html>
