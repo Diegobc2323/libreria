@@ -46,12 +46,20 @@
                             <h:outputText value="#{libro.nomArchivo}"/>
                         </p:column>
                         <p:column headerText="Escritores">
-                            
+                            <h:selectManyListbox size="3" style="overflow-y:scroll; width:180px;" disabled="true">
+                                <f:selectItems var="autor" value="#{libro.autorList}" itemLabel="#{autor.apellido1} #{autor.apellido2}, #{autor.nomAutor}"/>
+                            </h:selectManyListbox>
+                        </p:column>
+                        
+                        <p:column headerText="Sus Premios">
+                            <h:selectManyListbox size="3"  style="overflow-y:scroll; width:180px;" disabled="true">
+                                <f:selectItems var="premio" value="#{libro.premioList}" itemLabel="#{premio.nomPremio}"/>
+                            </h:selectManyListbox>
                         </p:column>
                         
                         <p:column headerText="Acciones">
-                            <p:commandButton icon="pi pi-desktop" styleClass="rounded-button ui-button-flat"/>
-                            <p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-secondary ui-button-flat"/>
+                            <p:commandButton icon="pi pi-desktop" action="#{libroController.prepareView}" styleClass="rounded-button ui-button-flat"/>
+                            <p:commandButton icon="pi pi-pencil" action="#{libroController.prepareEdit}" styleClass="rounded-button ui-button-secondary ui-button-flat"/>
                             <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat"/>
                         </p:column>
                     </p:dataTable> 
@@ -61,6 +69,12 @@
                 <br />
                 <br />
                 <h:link outcome="/index" value="#{bundle.ListLibroIndexLink}"/>
+                
+                 <p:dock position="bottom">
+                     <p:menuitem value="Home" outcome="/index" icon="/resources/iconos/refresh.png"/>
+                    <p:menuitem value="Crear Libro" action="#{libroController.prepareCreate}" icon="/resources/iconos/add.png"/>
+                </p:dock>
+                
             </h:form>
         </ui:define>
     </ui:composition>

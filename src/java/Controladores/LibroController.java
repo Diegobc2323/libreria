@@ -83,7 +83,7 @@ public class LibroController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+    public String create() {        
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("LibroCreated"));

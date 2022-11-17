@@ -4,6 +4,7 @@ import Entidades.Autor;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
 import Entidades.Pais;
+import Entidades.Premio;
 import Facades.AutorFacade;
 
 import java.io.Serializable;
@@ -34,6 +35,7 @@ public class AutorController implements Serializable {
     private int selectedItemIndex;
     private Pais pais;
     private List<Autor> autores;
+    private Premio premio;
 
     public List<Autor> getAutores() {
         return autores;
@@ -52,6 +54,14 @@ public class AutorController implements Serializable {
 
     public void setPais(Pais pais) {
         this.pais = pais;
+    }
+
+    public Premio getPremio() {
+        return premio;
+    }
+
+    public void setPremio(Premio premio) {
+        this.premio = premio;
     }
 
     
@@ -213,13 +223,9 @@ public class AutorController implements Serializable {
     }
 
     public static SelectItem[] getSelectAutores(List<Autor> entities, boolean selectOne) {
-        int size = selectOne ? entities.size() + 1 : entities.size();
+        int size = entities.size();
         SelectItem[] items = new SelectItem[size];
         int i = 0;
-        if (selectOne) {
-            items[0] = new SelectItem("", "Selecciona un autor");
-            i++;
-        }
         for (Autor autor : entities) {
             items[i++] = new SelectItem(autor, autor.getApellido1()+" "+autor.getApellido1()+","+autor.getNomAutor());
         }

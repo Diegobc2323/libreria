@@ -6,9 +6,11 @@
 package Facades;
 
 import Entidades.Premio;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,20 @@ public class PremioFacade extends AbstractFacade<Premio> {
 
     public PremioFacade() {
         super(Premio.class);
+    }
+    
+    public List<Premio> findPremiosL(){
+        em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Premio.findPremiosL");
+        return q.getResultList();
+    }
+    
+    public List<Premio> findPremiosA(){
+        em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Premio.findPremiosA");
+        return q.getResultList();
     }
     
 }

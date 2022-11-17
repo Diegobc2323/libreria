@@ -6,6 +6,7 @@ import Controladores.util.PaginationHelper;
 import Facades.PremioFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -201,11 +202,35 @@ public class PremioController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return getSelectPremiosL(ejbFacade.findPremiosL(), true);
+    }
+    
+    public SelectItem[] getItemsPremiosA() {
+        return getSelectPremiosA(ejbFacade.findPremiosA(), true);
     }
 
     public Premio getPremio(java.lang.Integer id) {
         return ejbFacade.find(id);
+    }
+    
+    public static SelectItem[] getSelectPremiosL(List<Premio> entities, boolean selectOne) {
+        int size = entities.size();
+        SelectItem[] items = new SelectItem[size];
+        int i = 0;
+        for (Premio premio : entities) {
+            items[i++] = new SelectItem(premio, premio.getNomPremio());
+        }
+        return items;
+    }
+    
+    public static SelectItem[] getSelectPremiosA(List<Premio> entities, boolean selectOne) {
+        int size = entities.size();
+        SelectItem[] items = new SelectItem[size];
+        int i = 0;
+        for (Premio premio : entities) {
+            items[i++] = new SelectItem(premio, premio.getNomPremio());
+        }
+        return items;
     }
 
     @FacesConverter(forClass = Premio.class)
