@@ -7,6 +7,7 @@ package Facades;
 
 import Entidades.Autor;
 import Entidades.Pais;
+import Entidades.Premio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -46,5 +47,13 @@ public class AutorFacade extends AbstractFacade<Autor> {
         q = em.createNamedQuery("Autor.findByPais").setParameter("pais", pais);
         return q.getResultList();
     }
+    
+    public List<Autor> autoresDeUnPremio(Premio premio){
+        em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("AutorPremio.findByCodPremio").setParameter("codPremio", premio.getCodPremio());
+        return q.getResultList();
+    }
+    
     
 }

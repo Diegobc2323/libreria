@@ -36,6 +36,7 @@ public class AutorController implements Serializable {
     private Pais pais;
     private List<Autor> autores;
     private Premio premio;
+    private List<Autor> autoresPremios;
 
     public List<Autor> getAutores() {
         return autores;
@@ -62,6 +63,14 @@ public class AutorController implements Serializable {
 
     public void setPremio(Premio premio) {
         this.premio = premio;
+    }
+
+    public List<Autor> getAutoresPremios() {
+        return autoresPremios;
+    }
+
+    public void setAutoresPremios(List<Autor> autoresPremios) {
+        this.autoresPremios = autoresPremios;
     }
 
     
@@ -260,6 +269,11 @@ public class AutorController implements Serializable {
         public void cargarAutoresPais()
         {
             this.autores = ejbFacade.autoresDeUnPais(pais); 
+        }
+        
+        public void cargarAutoresPremio()
+        {
+            this.autoresPremios = ejbFacade.autoresDeUnPremio(premio); 
         }
 
     @FacesConverter(forClass = Autor.class)

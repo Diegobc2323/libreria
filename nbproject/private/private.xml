@@ -5,10 +5,13 @@
         <group>
             <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/src/java/Facades/PremioFacade.java</file>
             <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/src/java/Controladores/PremioController.java</file>
+            <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/src/java/Entidades/Autor.java</file>
             <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/src/java/Entidades/Premio.java</file>
             <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/web/autor/List.xhtml</file>
+            <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/src/java/Facades/AutorFacade.java</file>
             <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/web/libro/List.xhtml</file>
             <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/web/libro/Create.xhtml</file>
+            <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/src/java/Entidades/AutorPremio.java</file>
             <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/web/autor/AutoresPremiados.xhtml</file>
             <file>file:/C:/Users/propietario/Documents/NetBeansProjects/libreria/src/java/Controladores/AutorController.java</file>
         </group>

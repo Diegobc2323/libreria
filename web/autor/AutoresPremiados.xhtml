@@ -19,7 +19,7 @@
                 <h:outputText escape="false" value="#{bundle.ListAutorEmpty}" rendered="#{autorController.items.rowCount == 0}"/>
                 
                 
-                <h:selectOneMenu value="#{autorController.premio}" onchange="">
+                <h:selectOneMenu value="#{autorController.premio}" onchange="#{autorController.cargarAutoresPremio()}">
                     <f:selectItems value="#{premioController.itemsPremiosA}" var="premio" itemValue="#{premio}" itemLabel="#{premio.nomPremio}"/>
                 </h:selectOneMenu>
                 
@@ -27,7 +27,7 @@
                     <h:outputText value="#{autorController.pagination.pageFirstItem + 1}..#{autorController.pagination.pageLastItem + 1}/#{autorController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{autorController.previous}" value="#{bundle.Previous} #{autorController.pagination.pageSize}" rendered="#{autorController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{autorController.next}" value="#{bundle.Next} #{autorController.pagination.pageSize}" rendered="#{autorController.pagination.hasNextPage}"/>&nbsp;
-                    <p:dataTable var="autor" value="#{autorController.items}" rows="10">
+                    <p:dataTable var="autor" value="#{autorController.autoresPremios}" rows="10">
                         <p:column headerText="Codigo" class="text-center" width="8%"> 
                             <h:outputText value="#{autor.codAutor}"/>
                         </p:column>
