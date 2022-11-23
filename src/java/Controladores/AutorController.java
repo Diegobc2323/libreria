@@ -3,6 +3,7 @@ package Controladores;
 import Entidades.Autor;
 import Controladores.util.JsfUtil;
 import Controladores.util.PaginationHelper;
+import Entidades.AutorPremio;
 import Entidades.Pais;
 import Entidades.Premio;
 import Facades.AutorFacade;
@@ -36,7 +37,7 @@ public class AutorController implements Serializable {
     private Pais pais;
     private List<Autor> autores;
     private Premio premio;
-    private List<Autor> autoresPremios;
+    private List<AutorPremio> autoresPremios;
 
     public List<Autor> getAutores() {
         return autores;
@@ -65,11 +66,11 @@ public class AutorController implements Serializable {
         this.premio = premio;
     }
 
-    public List<Autor> getAutoresPremios() {
+    public List<AutorPremio> getAutoresPremios() {
         return autoresPremios;
     }
 
-    public void setAutoresPremios(List<Autor> autoresPremios) {
+    public void setAutoresPremios(List<AutorPremio> autoresPremios) {
         this.autoresPremios = autoresPremios;
     }
 

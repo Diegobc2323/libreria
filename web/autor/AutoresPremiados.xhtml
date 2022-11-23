@@ -19,21 +19,27 @@
                 <h:outputText escape="false" value="#{bundle.ListAutorEmpty}" rendered="#{autorController.items.rowCount == 0}"/>
                 
                 
-                <h:selectOneMenu value="#{autorController.premio}" onchange="#{autorController.cargarAutoresPremio()}">
+                <h:selectOneMenu value="#{autorController.premio}" onchange="#{autorController.cargarAutoresPremio()} submit()">
                     <f:selectItems value="#{premioController.itemsPremiosA}" var="premio" itemValue="#{premio}" itemLabel="#{premio.nomPremio}"/>
                 </h:selectOneMenu>
+                
+                
                 
                 <h:panelGroup rendered="#{autorController.items.rowCount > 0}">
                     <h:outputText value="#{autorController.pagination.pageFirstItem + 1}..#{autorController.pagination.pageLastItem + 1}/#{autorController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{autorController.previous}" value="#{bundle.Previous} #{autorController.pagination.pageSize}" rendered="#{autorController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{autorController.next}" value="#{bundle.Next} #{autorController.pagination.pageSize}" rendered="#{autorController.pagination.hasNextPage}"/>&nbsp;
-                    <p:dataTable var="autor" value="#{autorController.autoresPremios}" rows="10">
+                    <p:dataTable var="autorPr" value="#{autorController.autoresPremios}" rows="10">
                         <p:column headerText="Codigo" class="text-center" width="8%"> 
-                            <h:outputText value="#{autor.codAutor}"/>
+                            <h:outputText value="#{autorPr.autor.codAutor}"/>
                         </p:column>
                         
-                        <p:column headerText="Nombre" sortBy="#{autor.apellido1} #{autor.apellido2}" width="10%" >
-                            <h:outputText value="#{autor.apellido1} #{autor.apellido2}, #{autor.nomAutor}"/>
+                        <p:column headerText="Nombre" sortBy="#{autorPr.autor.apellido1} #{autorPr.autor.apellido2}" width="10%" >
+                            <h:outputText value="#{autorPr.autor.apellido1} #{autorPr.autor.apellido2}, #{autorPr.autor.nomAutor}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Año" sortBy="#{autorPr.autorPremioPK.anio}" width="10%" >
+                            <h:outputText value="#{autorPr.autorPremioPK.anio}"/>
                         </p:column>
             
                         

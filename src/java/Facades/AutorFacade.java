@@ -6,6 +6,7 @@
 package Facades;
 
 import Entidades.Autor;
+import Entidades.AutorPremio;
 import Entidades.Pais;
 import Entidades.Premio;
 import java.util.List;
@@ -48,10 +49,10 @@ public class AutorFacade extends AbstractFacade<Autor> {
         return q.getResultList();
     }
     
-    public List<Autor> autoresDeUnPremio(Premio premio){
+    public List<AutorPremio> autoresDeUnPremio(Premio premio){
         em = getEntityManager();
         Query q;
-        q = em.createNamedQuery("AutorPremio.findByCodPremio").setParameter("codPremio", premio.getCodPremio());
+        q = em.createNamedQuery("AutorPremio.findByPremio").setParameter("premio", premio);
         return q.getResultList();
     }
     
